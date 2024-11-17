@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Registration Form</title>
+</head>
+<body>
+
+    <!-- When form is loaded,
+        Spring MVC will read student from the model, then call:
+            student.getFirstName()
+            …
+            student.getLastName() -->
+
+    <h3>Student Registration Form</h3>
+
+    <!-- ${student} - name of the Model Attribute -->
+    <form th:action="@{/processStudentForm}" th:object="${student}" method="POST">
+
+        <!-- *{ … } is shortcut syntax for: ${student.firstName} -->
+        <!-- th:field - binds to the property on the student object -->
+        First Name: <input type="text" th:field="*{firstName}" /> <br><br>
+
+        Last Name: <input type="text" th:field="*{lastName}" /> <br><br>
+
+        <!-- th:value - value sent during form submission -->
+        Country: <select th:field="*{country}">
+                        <!-- loop over the list of countries -->
+                        <option th:each="tempCountry : ${countries}" th:value="${tempCountry}" th:text="${tempCountry}">
+                        </option>
+<!--                    <option th:value="Brazil">Brazil</option>-->
+<!--                    <option th:value="France">France</option>-->
+                 </select> <br><br>
+
+        Favorite Programming Language:
+            <input type="radio" th:field="*{favoriteLanguage}"
+                   th:each="tempLang : ${languages}" th:value="${tempLang}" th:text="${tempLang}" /> <br><br>
+<!--            <input type="radio" th:field="*{favoriteLanguage}" th:value="Go">Go</input>-->
+<!--            <input type="radio" th:field="*{favoriteLanguage}" th:value="Java">Java</input>-->
+
+        Favorite Operating Systems:
+            <input type="checkbox" th:field="*{favoriteSystems}"
+                   th:each="tempSystem : ${systems}" th:value="${tempSystem}" th:text="${tempSystem}" />
+<!--            <input type="checkbox" th:field="*{favoriteSystems}" th:value="macOS">macOS</input>-->
+<!--            <input type="checkbox" th:field="*{favoriteSystems}" th:value="'Microsoft Windows'">Microsoft Windows</input>-->
+
+        <br><br>
+
+        <input type="submit" value="Submit" />
+
+        <!-- When form is submitted,
+            Spring MVC will create a new Student instance and add to the model,
+            then call:
+            student.setFirstName(…)
+            …
+            student.setLastName(…) -->
+
+    </form>
+
+</body>
+</html>

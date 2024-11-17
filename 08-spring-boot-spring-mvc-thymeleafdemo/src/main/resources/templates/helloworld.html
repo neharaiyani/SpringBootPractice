@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Themeleaf Demo</title>
+
+    <!-- reference CSS file -->
+    <!-- @ symbol: Reference context path of your application (app root) -->
+    <link rel="stylesheet" th:href="@{/css/demo.css}">
+</head>
+<body>
+    Hello World of Spring <br><br>
+
+    <!-- studentName is a form parameter -->
+    Student Name: <span th:text="${param.studentName}" class="funny"></span> <br><br>
+
+    <!-- message is a model attribute -->
+    The Message: <span th:text="${message}"></span>
+</body>
+</html>
